@@ -1,7 +1,7 @@
 import {
-  checkSun,
-  checkWater,
-  checkNutrients,
+  updateSun,
+  updateWater,
+  updateNutrients,
 } from '../../store/actions/growerActions';
 
 import {
@@ -24,7 +24,7 @@ export const mapStateToProps = state => {
 export const mapDispatchToProps = dispatch => ({
   setPlantIsAlive: () => dispatch(setPlantIsAlive()),
   setPlantIsNotAlive: () => dispatch(setPlantIsNotAlive()),
-  checkSun: () => dispatch(checkSun()),
-  checkWater: () => dispatch(checkWater()),
-  checkNutrients: () => dispatch(checkNutrients()),
+  updateSun: sun => dispatch(updateSun(sun)),
+  updateWater: water => dispatch(updateWater(water)),
+  updateNutrients: nutrients => dispatch(updateNutrients(nutrients)),
 });

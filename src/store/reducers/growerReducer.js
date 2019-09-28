@@ -15,17 +15,17 @@ const growerReducer = (state = initState, action) => {
     case UPDATE_SUN:
       return {
         ...state,
-        sun: action.sun,
+        sun: action.payload.sun,
       };
     case UPDATE_WATER:
       return {
         ...state,
-        water: action.water,
+        water: action.payload.water,
       };
     case UPDATE_NUTRIENTS:
       return {
         ...state,
-        nutrients: action.nutrients,
+        nutrients: action.payload.nutrients,
       };
     default:
       return state;

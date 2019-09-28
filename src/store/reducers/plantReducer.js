@@ -4,9 +4,7 @@ import {
 } from '../actions/plantActions';
 
 const initState = {
-  isAlive: false,
-  width: 100,
-  height: 100,
+  isAlive: true,
   growth: 0,
   growthGoal: 10,
 };

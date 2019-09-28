@@ -10,25 +10,25 @@ import { stylesPlant as styles } from './_styles';
 class Plant extends Component {
   constructor(props) {
     super(props);
-    this.handleCheckSun = this.handleCheckSun.bind(this);
-    this.handleCheckWater = this.handleCheckWater.bind(this);
-    this.handleCheckNutrients = this.handleCheckNutrients.bind(this);
+    this.handleSun = this.handleSun.bind(this);
+    this.handleWater = this.handleWater.bind(this);
+    this.handleNutrients = this.handleNutrients.bind(this);
   }
 
-  handleCheckSun() {
-    this.props.checkSun();
+  handleSun() {
+    this.props.updateSun(this.props.sun);
   }
 
-  handleCheckWater() {
-    this.props.checkWater();
+  handleWater() {
+    this.props.updateWater(this.props.water);
   }
 
-  handleCheckNutrients() {
-    this.props.checkNutrients();
+  handleNutrients() {
+    this.props.updateNutrients(this.props.nutrients);
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, isAlive } = this.props;
     return (
       <div className={classes.content}>
         <AppBar position="fixed">
@@ -43,28 +43,28 @@ class Plant extends Component {
           <Button
             variant="outlined"
             className={classes.button}
-            onClick={this.handleCheckSun}
+            onClick={this.handleSun}
           >
             Sun
           </Button>
           <Button
             variant="outlined"
             className={classes.button}
-            onClick={this.handleCheckWater}
+            onClick={this.handleWater}
           >
             Water
           </Button>
           <Button
             variant="outlined"
             className={classes.button}
-            onClick={this.handleCheckNutrients}
+            onClick={this.handleNutrients}
           >
             Nutrients
           </Button>
         </div>
         <div className={classes.rootPlant}>
           <div className={classes.plant}>
-            <PlantSVG />
+            <PlantSVG isAlive={isAlive} />
           </div>
         </div>
       </div>
@@ -80,9 +80,9 @@ Plant.propTypes = {
   isAlive: PropTypes.bool.isRequired,
   setPlantIsAlive: PropTypes.func.isRequired,
   setPlantIsNotAlive: PropTypes.func.isRequired,
-  checkSun: PropTypes.func.isRequired,
-  checkWater: PropTypes.func.isRequired,
-  checkNutrients: PropTypes.func.isRequired,
+  updateSun: PropTypes.func.isRequired,
+  updateWater: PropTypes.func.isRequired,
+  updateNutrients: PropTypes.func.isRequired,
 };
 
 export default connect(
