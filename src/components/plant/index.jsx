@@ -15,11 +15,17 @@ class Plant extends Component {
     this.handleCheckNutrients = this.handleCheckNutrients.bind(this);
   }
 
-  handleCheckSun() {}
+  handleCheckSun() {
+    this.props.checkSun();
+  }
 
-  handleCheckWater() {}
+  handleCheckWater() {
+    this.props.checkWater();
+  }
 
-  handleCheckNutrients() {}
+  handleCheckNutrients() {
+    this.props.checkNutrients();
+  }
 
   render() {
     const { classes } = this.props;
@@ -74,12 +80,9 @@ Plant.propTypes = {
   isAlive: PropTypes.bool.isRequired,
   setPlantIsAlive: PropTypes.func.isRequired,
   setPlantIsNotAlive: PropTypes.func.isRequired,
-  increaseSun: PropTypes.func.isRequired,
-  decreaseSun: PropTypes.func.isRequired,
-  increaseWater: PropTypes.func.isRequired,
-  decreaseWater: PropTypes.func.isRequired,
-  increaseNutrients: PropTypes.func.isRequired,
-  decreaseNutrients: PropTypes.func.isRequired,
+  checkSun: PropTypes.func.isRequired,
+  checkWater: PropTypes.func.isRequired,
+  checkNutrients: PropTypes.func.isRequired,
 };
 
 export default connect(
