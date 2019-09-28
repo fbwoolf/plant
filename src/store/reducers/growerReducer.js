@@ -1,7 +1,10 @@
 import {
-  UPDATE_SUN,
-  UPDATE_WATER,
-  UPDATE_NUTRIENTS,
+  INCREASE_SUN,
+  DECREASE_SUN,
+  INCREASE_WATER,
+  DECREASE_WATER,
+  INCREASE_NUTRIENTS,
+  DECREASE_NUTRIENTS,
 } from '../actions/growerActions';
 
 const initState = {
@@ -12,17 +15,32 @@ const initState = {
 
 const growerReducer = (state = initState, action) => {
   switch (action.type) {
-    case UPDATE_SUN:
+    case INCREASE_SUN:
       return {
         ...state,
         sun: action.sun,
       };
-    case UPDATE_WATER:
+    case DECREASE_SUN:
+      return {
+        ...state,
+        sun: action.sun,
+      };
+    case INCREASE_WATER:
       return {
         ...state,
         water: action.water,
       };
-    case UPDATE_NUTRIENTS:
+    case DECREASE_WATER:
+      return {
+        ...state,
+        water: action.water,
+      };
+    case INCREASE_NUTRIENTS:
+      return {
+        ...state,
+        nutrients: action.nutrients,
+      };
+    case DECREASE_NUTRIENTS:
       return {
         ...state,
         nutrients: action.nutrients,
