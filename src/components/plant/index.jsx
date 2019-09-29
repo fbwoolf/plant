@@ -13,6 +13,13 @@ class Plant extends Component {
     this.handleSun = this.handleSun.bind(this);
     this.handleWater = this.handleWater.bind(this);
     this.handleNutrients = this.handleNutrients.bind(this);
+    this.handleResetGame = this.handleResetGame.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.growth !== prevProps.growth) {
+      this.props.checkPlantGrowthGoal(this.props.growth);
+    }
   }
 
   handleSun() {
@@ -33,15 +40,35 @@ class Plant extends Component {
     this.props.checkPlantCanGrow();
   }
 
+  handleResetGame() {
+    this.props.resetGame();
+  }
+
   render() {
-    const { classes, isAlive, growth, isFullyGrown } = this.props;
+    console.log(this.props.isFullyGrown);
+    const {
+      classes,
+      sun,
+      water,
+      nutrients,
+      isAlive,
+      growth,
+      isFullyGrown,
+    } = this.props;
     return (
       <div className={classes.content}>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography variant="h6" color="inherit">
+            <Typography variant="h6" color="inherit" className={classes.title}>
               Plant
             </Typography>
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={this.handleResetGame}
+            >
+              Reset
+            </Button>
           </Toolbar>
         </AppBar>
         <div className={classes.toolbar} />
@@ -51,35 +78,49 @@ class Plant extends Component {
             className={classes.button}
             onClick={this.handleSun}
           >
-            Sun
+            {`Sun = ${sun}`}
           </Button>
           <Button
             variant="outlined"
             className={classes.button}
             onClick={this.handleWater}
           >
-            Water
+            {`Water = ${water}`}
           </Button>
           <Button
             variant="outlined"
             className={classes.button}
             onClick={this.handleNutrients}
           >
-            Nutrients
+            {`Nutrients = ${nutrients}`}
           </Button>
         </div>
-        {isFullyGrown && (
+        {!isFullyGrown ? (
+          <div className={classes.rootPrompt}>
+            <Typography variant="h6" color="inherit">
+              Help me grow!
+            </Typography>
+          </div>
+        ) : (
           <div className={classes.rootPrompt}>
             <Typography variant="h6" color="inherit">
               Time to harvest!
             </Typography>
           </div>
         )}
-        <div className={classes.rootPlant}>
-          <div className={classes.plant}>
-            <PlantSVG isAlive={isAlive} growth={growth} />
+        {!isFullyGrown ? (
+          <div className={classes.rootPlant}>
+            <div className={classes.plant}>
+              <PlantSVG isAlive={isAlive} growth={growth} />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className={classes.rootSuccess}>
+            <div className={classes.shears}>
+              <img src={'/garden-shears.png'} alt=""></img>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -95,9 +136,11 @@ Plant.propTypes = {
   isFullyGrown: PropTypes.bool.isRequired,
   checkPlantIsAlive: PropTypes.func.isRequired,
   checkPlantCanGrow: PropTypes.func.isRequired,
+  checkPlantGrowthGoal: PropTypes.func.isRequired,
   updateSun: PropTypes.func.isRequired,
   updateWater: PropTypes.func.isRequired,
   updateNutrients: PropTypes.func.isRequired,
+  resetGame: PropTypes.func.isRequired,
 };
 
 export default connect(

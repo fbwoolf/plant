@@ -4,6 +4,7 @@ import {
   SET_PLANT_CAN_GROW,
   SET_PLANT_CAN_NOT_GROW,
   SET_PLANT_IS_FULLY_GROWN,
+  SET_PLANT_IS_NOT_FULLY_GROWN,
   UPDATE_GROWTH,
 } from '../actions/plantActions';
 
@@ -40,6 +41,11 @@ const plantReducer = (state = initState, action) => {
       return {
         ...state,
         isFullyGrown: true,
+      };
+    case SET_PLANT_IS_NOT_FULLY_GROWN:
+      return {
+        ...state,
+        isFullyGrown: false,
       };
     case UPDATE_GROWTH:
       return {

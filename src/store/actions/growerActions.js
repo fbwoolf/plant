@@ -1,3 +1,10 @@
+import {
+  SET_PLANT_IS_ALIVE,
+  SET_PLANT_CAN_NOT_GROW,
+  SET_PLANT_IS_NOT_FULLY_GROWN,
+  UPDATE_GROWTH,
+} from '../actions/plantActions';
+
 export const UPDATE_SUN = 'UPDATE_SUN';
 export const UPDATE_WATER = 'UPDATE_WATER';
 export const UPDATE_NUTRIENTS = 'UPDATE_NUTRIENTS';
@@ -43,9 +50,19 @@ export const updateNutrients = nutrients => (dispatch, getState) => {
     },
   });
   dispatch({
-    type: UPDATE_SUN,
+    type: UPDATE_WATER,
     payload: {
-      sun: grower.sun - 1,
+      water: grower.water !== 0 ? grower.water - 1 : 0,
     },
   });
+};
+
+export const resetGame = () => dispatch => {
+  dispatch({ type: UPDATE_SUN, payload: { sun: 0 } });
+  dispatch({ type: UPDATE_WATER, payload: { water: 0 } });
+  dispatch({ type: UPDATE_NUTRIENTS, payload: { nutrients: 0 } });
+  dispatch({ type: SET_PLANT_IS_ALIVE, payload: {} });
+  dispatch({ type: SET_PLANT_CAN_NOT_GROW, payload: {} });
+  dispatch({ type: SET_PLANT_IS_NOT_FULLY_GROWN, payload: {} });
+  dispatch({ type: UPDATE_GROWTH, payload: { growth: 1 } });
 };

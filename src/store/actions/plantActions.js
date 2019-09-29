@@ -5,6 +5,7 @@ export const SET_PLANT_IS_NOT_ALIVE = 'SET_PLANT_IS_NOT_ALIVE';
 export const SET_PLANT_CAN_GROW = 'SET_PLANT_CAN_GROW';
 export const SET_PLANT_CAN_NOT_GROW = 'SET_PLANT_CAN_NOT_GROW';
 export const SET_PLANT_IS_FULLY_GROWN = 'SET_PLANT_IS_FULLY_GROWN';
+export const SET_PLANT_IS_NOT_FULLY_GROWN = 'SET_PLANT_IS_NOT_FULLY_GROWN';
 export const UPDATE_GROWTH = 'UPDATE_GROWTH';
 
 export const setPlantIsAlive = () => ({
@@ -32,6 +33,11 @@ export const setPlantIsFullyGrown = () => ({
   payload: {},
 });
 
+export const setPlantIsNotFullyGrown = () => ({
+  type: SET_PLANT_IS_NOT_FULLY_GROWN,
+  payload: {},
+});
+
 export const updateGrowth = growth => dispatch => {
   dispatch({
     type: UPDATE_GROWTH,
@@ -41,12 +47,12 @@ export const updateGrowth = growth => dispatch => {
   });
 };
 
-export const checkPlantGrowthGoal = () => (dispatch, getState) => {
-  const { grower } = getState();
-  const { growth } = grower;
+export const checkPlantGrowthGoal = growth => dispatch => {
+  console.log('Here!');
+  console.log(growth);
   // Rule:
-  // If growth equals 6
-  if (growth === 6) {
+  // If growth equals 7
+  if (growth === 7) {
     dispatch(setPlantIsFullyGrown());
   } else {
     return;
@@ -81,7 +87,6 @@ export const checkPlantCanGrow = () => (dispatch, getState) => {
     dispatch({ type: UPDATE_SUN, payload: { sun: 0 } });
     dispatch({ type: UPDATE_WATER, payload: { water: 0 } });
     dispatch({ type: UPDATE_NUTRIENTS, payload: { nutrients: 0 } });
-    dispatch(checkPlantGrowthGoal());
   } else {
     dispatch(setPlantCanNotGrow());
   }
