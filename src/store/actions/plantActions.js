@@ -61,10 +61,10 @@ export const checkPlantIsAlive = () => (dispatch, getState) => {
   const { grower } = getState();
   const { sun, water, nutrients } = grower;
   // Rules:
-  // sun cannot equal more than 2 more than water
-  // water cannot equal more than 3
-  // nutrients cannot equal more than 1 more than sun
-  if (sun > water + 2 || water > 3 || nutrients > sun + 1) {
+  // sun cannot equal 2 more than water
+  // water cannot equal 2 more than the sun
+  // nutrients cannot equal 2 more than water
+  if (sun > water + 2 || water > sun + 3 || nutrients > water + 2) {
     dispatch(setPlantIsNotAlive());
   } else {
     dispatch(setPlantIsAlive());
@@ -76,10 +76,10 @@ export const checkPlantCanGrow = () => (dispatch, getState) => {
   const { sun, water, nutrients } = grower;
   const { growth } = plant;
   // Rule:
-  // Can grow if sun is equal to 2
-  // And, water is equal to 3
-  // And, nutrients is equal to 1
-  if (sun === 2 && water === 3 && nutrients === 1) {
+  // Can grow if sun is equal water
+  // And, water is great than or equal to 2
+  // And, nutrients is equal to 1 less than water
+  if (sun === water && water >= 2 && nutrients === water - 1) {
     dispatch(setPlantCanGrow());
     dispatch(updateGrowth(growth));
     dispatch({ type: UPDATE_SUN, payload: { sun: 0 } });

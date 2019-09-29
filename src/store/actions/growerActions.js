@@ -34,6 +34,12 @@ export const updateWater = water => (dispatch, getState) => {
     },
   });
   dispatch({
+    type: UPDATE_SUN,
+    payload: {
+      sun: grower.sun !== 0 ? grower.sun - 1 : 0,
+    },
+  });
+  dispatch({
     type: UPDATE_NUTRIENTS,
     payload: {
       nutrients: grower.nutrients !== 0 ? grower.nutrients - 1 : 0,
@@ -41,18 +47,11 @@ export const updateWater = water => (dispatch, getState) => {
   });
 };
 
-export const updateNutrients = nutrients => (dispatch, getState) => {
-  const { grower } = getState();
+export const updateNutrients = nutrients => dispatch => {
   dispatch({
     type: UPDATE_NUTRIENTS,
     payload: {
       nutrients: nutrients + 1,
-    },
-  });
-  dispatch({
-    type: UPDATE_WATER,
-    payload: {
-      water: grower.water !== 0 ? grower.water - 1 : 0,
     },
   });
 };
