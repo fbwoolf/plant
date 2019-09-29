@@ -45,7 +45,6 @@ class Plant extends Component {
   }
 
   render() {
-    console.log(this.props.isFullyGrown);
     const {
       classes,
       sun,

@@ -48,8 +48,6 @@ export const updateGrowth = growth => dispatch => {
 };
 
 export const checkPlantGrowthGoal = growth => dispatch => {
-  console.log('Here!');
-  console.log(growth);
   // Rule:
   // If growth equals 7
   if (growth === 7) {
