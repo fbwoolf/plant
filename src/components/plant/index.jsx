@@ -17,18 +17,24 @@ class Plant extends Component {
 
   handleSun() {
     this.props.updateSun(this.props.sun);
+    this.props.checkPlantIsAlive();
+    this.props.checkPlantCanGrow();
   }
 
   handleWater() {
     this.props.updateWater(this.props.water);
+    this.props.checkPlantIsAlive();
+    this.props.checkPlantCanGrow();
   }
 
   handleNutrients() {
     this.props.updateNutrients(this.props.nutrients);
+    this.props.checkPlantIsAlive();
+    this.props.checkPlantCanGrow();
   }
 
   render() {
-    const { classes, isAlive } = this.props;
+    const { classes, isAlive, growth, isFullyGrown } = this.props;
     return (
       <div className={classes.content}>
         <AppBar position="fixed">
@@ -39,7 +45,7 @@ class Plant extends Component {
           </Toolbar>
         </AppBar>
         <div className={classes.toolbar} />
-        <div className={classes.rootButton}>
+        <div className={classes.rootControls}>
           <Button
             variant="outlined"
             className={classes.button}
@@ -62,9 +68,16 @@ class Plant extends Component {
             Nutrients
           </Button>
         </div>
+        {isFullyGrown && (
+          <div className={classes.rootPrompt}>
+            <Typography variant="h6" color="inherit">
+              Time to harvest!
+            </Typography>
+          </div>
+        )}
         <div className={classes.rootPlant}>
           <div className={classes.plant}>
-            <PlantSVG isAlive={isAlive} />
+            <PlantSVG isAlive={isAlive} growth={growth} />
           </div>
         </div>
       </div>
@@ -78,8 +91,10 @@ Plant.propTypes = {
   water: PropTypes.number.isRequired,
   nutrients: PropTypes.number.isRequired,
   isAlive: PropTypes.bool.isRequired,
-  setPlantIsAlive: PropTypes.func.isRequired,
-  setPlantIsNotAlive: PropTypes.func.isRequired,
+  growth: PropTypes.number.isRequired,
+  isFullyGrown: PropTypes.bool.isRequired,
+  checkPlantIsAlive: PropTypes.func.isRequired,
+  checkPlantCanGrow: PropTypes.func.isRequired,
   updateSun: PropTypes.func.isRequired,
   updateWater: PropTypes.func.isRequired,
   updateNutrients: PropTypes.func.isRequired,
