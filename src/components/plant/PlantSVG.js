@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PlantSVG = ({ isAlive, growth }) => {
+const PlantSVG = ({ isSick, growth }) => {
   return (
     /* eslint-disable */
     <svg
@@ -15,7 +15,7 @@ const PlantSVG = ({ isAlive, growth }) => {
         y="0"
         width="100"
         height={`${100 * growth}`}
-        fill={isAlive ? 'green' : 'red'}
+        fill={!isSick ? 'green' : 'red'}
       />
     </svg>
     /* eslint-enable */
@@ -23,7 +23,7 @@ const PlantSVG = ({ isAlive, growth }) => {
 };
 
 PlantSVG.propTypes = {
-  isAlive: PropTypes.bool.isRequired,
+  isSick: PropTypes.bool.isRequired,
   growth: PropTypes.number.isRequired,
 };
 

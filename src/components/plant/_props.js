@@ -6,7 +6,7 @@ import {
 } from '../../store/actions/growerActions';
 
 import {
-  checkPlantIsAlive,
+  checkPlantIsSick,
   checkPlantCanGrow,
   checkPlantGrowthGoal,
   checkHealthScore,
@@ -18,7 +18,7 @@ export const mapStateToProps = state => {
     sun: grower.sun,
     water: grower.water,
     nutrients: grower.nutrients,
-    isAlive: plant.isAlive,
+    isSick: plant.isSick,
     growth: plant.growth,
     health: plant.health,
     isFullyGrown: plant.isFullyGrown,
@@ -26,7 +26,7 @@ export const mapStateToProps = state => {
 };
 
 export const mapDispatchToProps = dispatch => ({
-  checkPlantIsAlive: () => dispatch(checkPlantIsAlive()),
+  checkPlantIsSick: () => dispatch(checkPlantIsSick()),
   checkPlantCanGrow: () => dispatch(checkPlantCanGrow()),
   checkPlantGrowthGoal: growth => dispatch(checkPlantGrowthGoal(growth)),
   updateSun: sun => dispatch(updateSun(sun)),

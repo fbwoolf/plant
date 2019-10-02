@@ -1,7 +1,12 @@
-import { UPDATE_SUN, UPDATE_WATER, UPDATE_NUTRIENTS, resetGame } from './growerActions';
+import {
+  UPDATE_SUN,
+  UPDATE_WATER,
+  UPDATE_NUTRIENTS,
+  resetGame,
+} from './growerActions';
 
-export const SET_PLANT_IS_ALIVE = 'SET_PLANT_IS_ALIVE';
-export const SET_PLANT_IS_NOT_ALIVE = 'SET_PLANT_IS_NOT_ALIVE';
+export const SET_PLANT_IS_SICK = 'SET_PLANT_IS_SICK';
+export const SET_PLANT_IS_NOT_SICK = 'SET_PLANT_IS_NOT_SICK';
 export const SET_PLANT_CAN_GROW = 'SET_PLANT_CAN_GROW';
 export const SET_PLANT_CAN_NOT_GROW = 'SET_PLANT_CAN_NOT_GROW';
 export const SET_PLANT_IS_FULLY_GROWN = 'SET_PLANT_IS_FULLY_GROWN';
@@ -9,13 +14,13 @@ export const SET_PLANT_IS_NOT_FULLY_GROWN = 'SET_PLANT_IS_NOT_FULLY_GROWN';
 export const UPDATE_GROWTH = 'UPDATE_GROWTH';
 export const UPDATE_HEALTH = 'UPDATE_HEALTH';
 
-export const setPlantIsAlive = () => ({
-  type: SET_PLANT_IS_ALIVE,
+export const setPlantIsSick = () => ({
+  type: SET_PLANT_IS_SICK,
   payload: {},
 });
 
-export const setPlantIsNotAlive = () => ({
-  type: SET_PLANT_IS_NOT_ALIVE,
+export const setPlantIsNotSick = () => ({
+  type: SET_PLANT_IS_NOT_SICK,
   payload: {},
 });
 
@@ -76,7 +81,7 @@ export const checkPlantGrowthGoal = growth => dispatch => {
   }
 };
 
-export const checkPlantIsAlive = () => (dispatch, getState) => {
+export const checkPlantIsSick = () => (dispatch, getState) => {
   const { grower, plant } = getState();
   const { sun, water, nutrients } = grower;
   const { health } = plant;
@@ -84,13 +89,13 @@ export const checkPlantIsAlive = () => (dispatch, getState) => {
   // sun cannot equal 2 more than water
   // water cannot equal 2 more than the sun
   // nutrients cannot equal 2 more than water
-  const isSick = sun > water + 2 || water > sun + 3 || nutrients > water + 2
+  const isSick = sun > water + 2 || water > sun + 3 || nutrients > water + 2;
   if (isSick) {
-    dispatch(setPlantIsNotAlive());
+    dispatch(setPlantIsSick());
     dispatch(decrementHealth(health));
   } else {
-    dispatch(setPlantIsAlive());
-    if (health <= 5){
+    dispatch(setPlantIsNotSick());
+    if (health < 10) {
       dispatch(incrementHealth(health));
     }
   }
@@ -119,4 +124,4 @@ export const checkHealthScore = health => dispatch => {
   if (health === 0) {
     dispatch(resetGame());
   }
-}
+};

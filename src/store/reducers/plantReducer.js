@@ -1,33 +1,33 @@
 import {
-  SET_PLANT_IS_ALIVE,
-  SET_PLANT_IS_NOT_ALIVE,
+  SET_PLANT_IS_SICK,
+  SET_PLANT_IS_NOT_SICK,
   SET_PLANT_CAN_GROW,
   SET_PLANT_CAN_NOT_GROW,
   SET_PLANT_IS_FULLY_GROWN,
   SET_PLANT_IS_NOT_FULLY_GROWN,
   UPDATE_GROWTH,
-  UPDATE_HEALTH
+  UPDATE_HEALTH,
 } from '../actions/plantActions';
 
 const initState = {
-  isAlive: true,
+  isSick: false,
   canGrow: false,
   isFullyGrown: false,
   growth: 1,
-  health: 1,
+  health: 5,
 };
 
 const plantReducer = (state = initState, action) => {
   switch (action.type) {
-    case SET_PLANT_IS_ALIVE:
+    case SET_PLANT_IS_SICK:
       return {
         ...state,
-        isAlive: true,
+        isSick: true,
       };
-    case SET_PLANT_IS_NOT_ALIVE:
+    case SET_PLANT_IS_NOT_SICK:
       return {
         ...state,
-        isAlive: false,
+        isSick: false,
       };
     case SET_PLANT_CAN_GROW:
       return {

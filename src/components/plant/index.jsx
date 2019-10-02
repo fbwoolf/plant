@@ -25,19 +25,19 @@ class Plant extends Component {
 
   handleSun() {
     this.props.updateSun(this.props.sun);
-    this.props.checkPlantIsAlive();
+    this.props.checkPlantIsSick();
     this.props.checkPlantCanGrow();
   }
 
   handleWater() {
     this.props.updateWater(this.props.water);
-    this.props.checkPlantIsAlive();
+    this.props.checkPlantIsSick();
     this.props.checkPlantCanGrow();
   }
 
   handleNutrients() {
     this.props.updateNutrients(this.props.nutrients);
-    this.props.checkPlantIsAlive();
+    this.props.checkPlantIsSick();
     this.props.checkPlantCanGrow();
   }
 
@@ -51,7 +51,7 @@ class Plant extends Component {
       sun,
       water,
       nutrients,
-      isAlive,
+      isSick,
       growth,
       isFullyGrown,
     } = this.props;
@@ -111,7 +111,7 @@ class Plant extends Component {
         {!isFullyGrown ? (
           <div className={classes.rootPlant}>
             <div className={classes.plant}>
-              <PlantSVG isAlive={isAlive} growth={growth} />
+              <PlantSVG isSick={isSick} growth={growth} />
             </div>
           </div>
         ) : (
@@ -131,10 +131,10 @@ Plant.propTypes = {
   sun: PropTypes.number.isRequired,
   water: PropTypes.number.isRequired,
   nutrients: PropTypes.number.isRequired,
-  isAlive: PropTypes.bool.isRequired,
+  isSick: PropTypes.bool.isRequired,
   growth: PropTypes.number.isRequired,
   isFullyGrown: PropTypes.bool.isRequired,
-  checkPlantIsAlive: PropTypes.func.isRequired,
+  checkPlantIsSick: PropTypes.func.isRequired,
   checkPlantCanGrow: PropTypes.func.isRequired,
   checkPlantGrowthGoal: PropTypes.func.isRequired,
   updateSun: PropTypes.func.isRequired,
