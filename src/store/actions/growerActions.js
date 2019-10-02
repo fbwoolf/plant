@@ -1,5 +1,5 @@
 import {
-  SET_PLANT_IS_SICK,
+  SET_PLANT_IS_NOT_SICK,
   SET_PLANT_CAN_NOT_GROW,
   SET_PLANT_IS_NOT_FULLY_GROWN,
   UPDATE_GROWTH,
@@ -60,7 +60,7 @@ export const resetGame = () => dispatch => {
   dispatch({ type: UPDATE_SUN, payload: { sun: 0 } });
   dispatch({ type: UPDATE_WATER, payload: { water: 0 } });
   dispatch({ type: UPDATE_NUTRIENTS, payload: { nutrients: 0 } });
-  dispatch({ type: SET_PLANT_IS_SICK, payload: {} });
+  dispatch({ type: SET_PLANT_IS_NOT_SICK, payload: {} });
   dispatch({ type: SET_PLANT_CAN_NOT_GROW, payload: {} });
   dispatch({ type: SET_PLANT_IS_NOT_FULLY_GROWN, payload: {} });
   dispatch({ type: UPDATE_GROWTH, payload: { growth: 1 } });
