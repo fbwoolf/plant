@@ -6,6 +6,7 @@ import {
   SET_PLANT_IS_FULLY_GROWN,
   SET_PLANT_IS_NOT_FULLY_GROWN,
   UPDATE_GROWTH,
+  UPDATE_HEALTH
 } from '../actions/plantActions';
 
 const initState = {
@@ -13,6 +14,7 @@ const initState = {
   canGrow: false,
   isFullyGrown: false,
   growth: 1,
+  health: 1,
 };
 
 const plantReducer = (state = initState, action) => {
@@ -51,6 +53,11 @@ const plantReducer = (state = initState, action) => {
       return {
         ...state,
         growth: action.payload.growth,
+      };
+    case UPDATE_HEALTH:
+      return {
+        ...state,
+        health: action.payload.health,
       };
     default:
       return state;

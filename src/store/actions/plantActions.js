@@ -1,4 +1,4 @@
-import { UPDATE_SUN, UPDATE_WATER, UPDATE_NUTRIENTS } from './growerActions';
+import { UPDATE_SUN, UPDATE_WATER, UPDATE_NUTRIENTS, resetGame } from './growerActions';
 
 export const SET_PLANT_IS_ALIVE = 'SET_PLANT_IS_ALIVE';
 export const SET_PLANT_IS_NOT_ALIVE = 'SET_PLANT_IS_NOT_ALIVE';
@@ -7,6 +7,7 @@ export const SET_PLANT_CAN_NOT_GROW = 'SET_PLANT_CAN_NOT_GROW';
 export const SET_PLANT_IS_FULLY_GROWN = 'SET_PLANT_IS_FULLY_GROWN';
 export const SET_PLANT_IS_NOT_FULLY_GROWN = 'SET_PLANT_IS_NOT_FULLY_GROWN';
 export const UPDATE_GROWTH = 'UPDATE_GROWTH';
+export const UPDATE_HEALTH = 'UPDATE_HEALTH';
 
 export const setPlantIsAlive = () => ({
   type: SET_PLANT_IS_ALIVE,
@@ -47,6 +48,24 @@ export const updateGrowth = growth => dispatch => {
   });
 };
 
+export const incrementHealth = health => dispatch => {
+  dispatch({
+    type: UPDATE_HEALTH,
+    payload: {
+      health: health + 1,
+    },
+  });
+};
+
+export const decrementHealth = health => dispatch => {
+  dispatch({
+    type: UPDATE_HEALTH,
+    payload: {
+      health: health - 1,
+    },
+  });
+};
+
 export const checkPlantGrowthGoal = growth => dispatch => {
   // Rule:
   // If growth equals 7
@@ -58,16 +77,22 @@ export const checkPlantGrowthGoal = growth => dispatch => {
 };
 
 export const checkPlantIsAlive = () => (dispatch, getState) => {
-  const { grower } = getState();
+  const { grower, plant } = getState();
   const { sun, water, nutrients } = grower;
+  const { health } = plant;
   // Rules:
   // sun cannot equal 2 more than water
   // water cannot equal 2 more than the sun
   // nutrients cannot equal 2 more than water
-  if (sun > water + 2 || water > sun + 3 || nutrients > water + 2) {
+  const isSick = sun > water + 2 || water > sun + 3 || nutrients > water + 2
+  if (isSick) {
     dispatch(setPlantIsNotAlive());
+    dispatch(decrementHealth(health));
   } else {
     dispatch(setPlantIsAlive());
+    if (health <= 5){
+      dispatch(incrementHealth(health));
+    }
   }
 };
 
@@ -89,3 +114,9 @@ export const checkPlantCanGrow = () => (dispatch, getState) => {
     dispatch(setPlantCanNotGrow());
   }
 };
+
+export const checkHealthScore = health => dispatch => {
+  if (health === 0) {
+    dispatch(resetGame());
+  }
+}

@@ -20,6 +20,7 @@ class Plant extends Component {
     if (this.props.growth !== prevProps.growth) {
       this.props.checkPlantGrowthGoal(this.props.growth);
     }
+    this.props.checkHealthScore(this.props.health);
   }
 
   handleSun() {
@@ -140,6 +141,7 @@ Plant.propTypes = {
   updateWater: PropTypes.func.isRequired,
   updateNutrients: PropTypes.func.isRequired,
   resetGame: PropTypes.func.isRequired,
+  checkHealthScore: PropTypes.func.isRequired,
 };
 
 export default connect(
