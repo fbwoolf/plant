@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-import Plant from './components/plant';
+import Game from './components/game';
 
 const styles = theme => ({
   root: {
@@ -17,7 +17,7 @@ class App extends Component {
         <div className={styles.root}>
           <CssBaseline />
           <Switch>
-            <Route exact path="/" component={Plant} />
+            <Route exact path="/" component={Game} />
           </Switch>
         </div>
       </BrowserRouter>

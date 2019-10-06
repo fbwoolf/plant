@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PlantSVG = ({ isSick, growth }) => {
+const PlantSVG = ({ color, growth }) => {
   return (
     /* eslint-disable */
     <svg
@@ -10,20 +10,14 @@ const PlantSVG = ({ isSick, growth }) => {
       viewBox={`0 0 100 ${100 * growth}`}
       overflow="visible"
     >
-      <rect
-        x="-25"
-        y="0"
-        width="100"
-        height={`${100 * growth}`}
-        fill={!isSick ? 'green' : 'red'}
-      />
+      <rect x="-25" y="0" width="100" height={`${100 * growth}`} fill={color} />
     </svg>
     /* eslint-enable */
   );
 };
 
 PlantSVG.propTypes = {
-  isSick: PropTypes.bool.isRequired,
+  color: PropTypes.string.isRequired,
   growth: PropTypes.number.isRequired,
 };
 

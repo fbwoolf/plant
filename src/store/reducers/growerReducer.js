@@ -2,6 +2,7 @@ import {
   UPDATE_SUN,
   UPDATE_WATER,
   UPDATE_NUTRIENTS,
+  RESET_GROWER,
 } from '../actions/growerActions';
 
 const initState = {
@@ -26,6 +27,13 @@ const growerReducer = (state = initState, action) => {
       return {
         ...state,
         nutrients: action.payload.nutrients,
+      };
+    case RESET_GROWER:
+      return {
+        ...state,
+        sun: 0,
+        water: 0,
+        nutrients: 0,
       };
     default:
       return state;
