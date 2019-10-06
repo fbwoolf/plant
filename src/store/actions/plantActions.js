@@ -91,7 +91,7 @@ export const checkPlantHealthScore = health => dispatch => {
     dispatch(setPlantColor('red'));
     setTimeout(() => {
       dispatch(resetDialogOpen());
-    }, 3000);
+    }, 1000);
   }
 };
 
